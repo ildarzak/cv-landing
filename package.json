@@ -1,0 +1,23 @@
+{
+  "name": "cv-landing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/events": "^3.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.4",
+    "@types/three": "^0.149.0",
+    "events": "^3.3.0",
+    "gsap": "^3.11.5",
+    "three": "^0.150.1"
+  }
+}
