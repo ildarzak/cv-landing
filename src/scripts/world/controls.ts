@@ -10,6 +10,14 @@ export class Controls {
     constructor() {
         GSAP.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+        if (
+            !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            this.setSmoothScroll();
+        }
+
         this.setScrollControlls();
         this.setScrollTriggerForMedia();
 
@@ -21,12 +29,15 @@ export class Controls {
         (document.querySelector(".page") as HTMLDivElement).style.overflow = "visible"
     }
 
-    myAutoKillFunction() {
-        alert("autoKill");
-    }
-
-    setScrollControlls() {
+    setSmoothScroll() {
         const lenis = new Lenis()
+
+
+        lenis.on('scroll', ScrollTrigger.update)
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000)
+        })
 
         function raf(time: number) {
             lenis.raf(time)
@@ -35,12 +46,10 @@ export class Controls {
 
         requestAnimationFrame(raf)
 
-        GSAP.ticker.add((time) => {
-            lenis.raf(time * 1000)
-        });
+        lenis.on('scroll', ScrollTrigger.update)
+    }
 
-
-
+    setScrollControlls() {
         ScrollTrigger.matchMedia({
             //Desktop
             "(min-width: 969px)": () => {
