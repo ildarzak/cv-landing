@@ -51,6 +51,8 @@ export default class Preload extends EventEmitter {
 
         // this.onScroll(1)
         window.addEventListener("wheel", this.onScroll);
+        window.addEventListener("touchstart", this.onTouch);
+        window.addEventListener("touchmove", this.onTouchMove);
     }
 
     async firstIntro() {
@@ -366,7 +368,7 @@ export default class Preload extends EventEmitter {
         let currentY = e.touches[0].clientY;
         let difference = this.initalY - currentY;
         if (difference > 0) {
-            // console.log("swipped up");
+            console.log("swipped up");
             this.removeEventListeners();
             await this.secondIntro();
         }
