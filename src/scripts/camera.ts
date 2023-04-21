@@ -1,4 +1,4 @@
-import { AxesHelper, GridHelper, OrthographicCamera, PerspectiveCamera } from "three";
+import { OrthographicCamera, PerspectiveCamera } from "three";
 import Sizes from "../utils/sizes";
 import App from "./app";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";

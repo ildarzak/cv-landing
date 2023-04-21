@@ -1,4 +1,4 @@
-import { BackSide, CircleGeometry, Color, Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
+import { BackSide, CircleGeometry, Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
 import App from "../app";
 
 export default class Floor {

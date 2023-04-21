@@ -1,7 +1,5 @@
 import { EventEmitter } from "events";
-// import * as THREE from "three";
 import App from "../app";
-import { Controls } from "./controls";
 import Environment from "./environment";
 import Floor from "./floor";
 import Room from "./room";

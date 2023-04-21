@@ -1,4 +1,4 @@
-import { AmbientLight, Color, DirectionalLight } from "three";
+import { AmbientLight, DirectionalLight } from "three";
 import App from "../app";
 import GSAP from "gsap";
 
