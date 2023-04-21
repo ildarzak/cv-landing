@@ -35,7 +35,7 @@ export class Controls {
 
         lenis.on('scroll', ScrollTrigger.update)
 
-        gsap.ticker.add((time) => {
+        GSAP.ticker.add((time) => {
             lenis.raf(time * 1000)
         })
 
@@ -45,8 +45,6 @@ export class Controls {
         }
 
         requestAnimationFrame(raf)
-
-        lenis.on('scroll', ScrollTrigger.update)
     }
 
     setScrollControlls() {
