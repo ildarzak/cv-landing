@@ -22,6 +22,8 @@ export default class Preload extends EventEmitter {
     scaleFlag = false;
     moveFlag = false;
 
+    initalY = 0;
+
     constructor() {
         super();
         App._instance._world.on("worldready", () => {
@@ -319,8 +321,8 @@ export default class Preload extends EventEmitter {
 
     removeEventListeners() {
         window.removeEventListener("wheel", this.onScroll);
-        // window.removeEventListener("touchstart", this.onTouch);
-        // window.removeEventListener("touchmove", this.touchMove);
+        window.removeEventListener("touchstart", this.onTouch);
+        window.removeEventListener("touchmove", this.onTouchMove);
     }
 
     scale() {
@@ -346,7 +348,7 @@ export default class Preload extends EventEmitter {
     //     this.initalY = e.touches[0].clientY;
     // }
 
-    onScroll = async (e: any) => {
+    onScroll = async (e: WheelEvent) => {
         if (e.deltaY > 0) {
             this.removeEventListeners();
             await this.secondIntro();
@@ -354,6 +356,22 @@ export default class Preload extends EventEmitter {
             this.scaleFlag = false;
             this.emit("enablecontrols");
         }
+    }
+
+    onTouch = (e: TouchEvent) => {
+        this.initalY = e.touches[0].clientY;
+    }
+
+    onTouchMove = async (e: TouchEvent) => {
+        let currentY = e.touches[0].clientY;
+        let difference = this.initalY - currentY;
+        if (difference > 0) {
+            // console.log("swipped up");
+            this.removeEventListeners();
+            await this.secondIntro();
+        }
+
+        this.initalY = 0;
     }
 
     update() {
