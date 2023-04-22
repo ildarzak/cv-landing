@@ -31,9 +31,9 @@ export default class App {
         App._instance = this;
 
         this._canvas = _canvas;
-        this._scene = new Scene();
-        this._time = new Time();
         this._sizes = new Sizes();
+        this._time = new Time();
+        this._scene = new Scene();
         this._camera = new Camera();
         this._renderer = new Renderer();
         this._loader = new Loader()

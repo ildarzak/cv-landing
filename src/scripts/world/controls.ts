@@ -71,6 +71,12 @@ export class Controls {
                         // }
                     },
                 })
+                    .from(App._instance._world._room?.roomScene.scale, {
+                        x: 0.5, y: 0.5, z: 0.5
+                    })
+                    .from(App._instance._world._room?.roomScene.position, {
+                        x: 0, y: 0, z: 0
+                    })
                     .to(
                         ".arrow-svg-wrapper",
                         {
@@ -270,7 +276,7 @@ export class Controls {
                         start: "top bottom",
                         end: "center top",
                         scrub: 0.6,
-                        invalidateOnRefresh: true,
+                        // invalidateOnRefresh: true,
                         // onEnter: () => {
                         //     GSAP.to(window, {
                         //         scrollTo: '.first-section',
@@ -279,6 +285,12 @@ export class Controls {
                         // }
                     },
                 })
+                    .from(App._instance._world._room?.roomScene.scale, {
+                        x: 0.25, y: 0.25, z: 0.25
+                    })
+                    .from(App._instance._world._room?.roomScene.position, {
+                        x: 0, y: 0, z: -1
+                    })
                     .to(
                         ".arrow-svg-wrapper",
                         {
