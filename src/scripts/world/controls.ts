@@ -57,7 +57,7 @@ export class Controls {
     }
 
     setScrollControlls() {
-        this.setSmoothScroll()
+        // this.setSmoothScroll()
         ScrollTrigger.matchMedia({
             //Desktop
             "(min-width: 969px)": () => {
