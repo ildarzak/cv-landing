@@ -10,14 +10,6 @@ export class Controls {
     constructor() {
         GSAP.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        if (
-            !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                navigator.userAgent
-            )
-        ) {
-            this.setSmoothScroll();
-        }
-
         this.setScrollControlls();
         this.setScrollTriggerForMedia();
 
@@ -48,6 +40,7 @@ export class Controls {
     }
 
     setScrollControlls() {
+        this.setSmoothScroll()
         ScrollTrigger.matchMedia({
             //Desktop
             "(min-width: 969px)": () => {

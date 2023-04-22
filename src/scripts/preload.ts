@@ -371,6 +371,9 @@ export default class Preload extends EventEmitter {
             console.log("swipped up");
             this.removeEventListeners();
             await this.secondIntro();
+            this.moveFlag = false;
+            this.scaleFlag = false;
+            this.emit("enablecontrols");
         }
 
         this.initalY = 0;
