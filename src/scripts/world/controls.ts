@@ -22,21 +22,38 @@ export class Controls {
     }
 
     setSmoothScroll() {
-        const lenis = new Lenis()
+        const lenis = new Lenis({
 
+        })
 
-        lenis.on('scroll', ScrollTrigger.update)
+        lenis.on('scroll', () => {
+            ScrollTrigger.update()
+        })
 
         GSAP.ticker.add((time) => {
             lenis.raf(time * 1000)
         })
 
-        function raf(time: number) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
+        ScrollTrigger.scrollerProxy(document.getElementsByClassName(".page-wrapper"), {
+            scrollTop(value) {
+                if (arguments.length) {
+                    lenis.setScroll(value)
+                }
+                console.log(value)
+                return lenis.scroll
+            },
+            getBoundingClientRect() {
+                console.log('asd')
+                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+            }
+        })
 
-        requestAnimationFrame(raf)
+        // function raf(time: number) {
+        //     lenis.raf(time)
+        //     requestAnimationFrame(raf)
+        // }
+
+        // requestAnimationFrame(raf)
     }
 
     setScrollControlls() {
@@ -77,8 +94,11 @@ export class Controls {
                     .from(App._instance._world._room?.roomScene.position, {
                         x: 0, y: 0, z: 0
                     })
-                    .to(
+                    .fromTo(
                         ".arrow-svg-wrapper",
+                        {
+                            opacity: 1,
+                        },
                         {
                             opacity: 0,
                         },
@@ -291,13 +311,13 @@ export class Controls {
                     .from(App._instance._world._room?.roomScene.position, {
                         x: 0, y: 0, z: -1
                     })
-                    .to(
-                        ".arrow-svg-wrapper",
-                        {
-                            opacity: 0,
-                        },
-                        "fadeout"
-                    )
+                    // .to(
+                    //     ".arrow-svg-wrapper",
+                    //     {
+                    //         opacity: 0,
+                    //     },
+                    //     "fadeout"
+                    // )
                     .to(
                         App._instance._world._room?.roomScene.scale,
                         {
@@ -340,6 +360,16 @@ export class Controls {
                         }
                     },
                 })
+                    .from(App._instance._world._room?.roomScene.scale, {
+                        x: 0.5,
+                        y: 0.5,
+                        z: 0.5,
+                    })
+                    .from(App._instance._world._room?.roomScene.position, {
+                        // x: 0,
+                        // y: 0,
+                        z: 0.2,
+                    })
                     .to(
                         App._instance._world._room?.roomScene.scale,
                         {
@@ -375,6 +405,16 @@ export class Controls {
                         // }
                     }
                 })
+                    .from(App._instance._world._room?.roomScene.scale, {
+                        x: 2.5,
+                        y: 2.5,
+                        z: 2.5,
+                    })
+                    .from(App._instance._world._room?.roomScene.position, {
+                        x: -0.5,
+                        // y: 0.5,
+                        z: -0.5,
+                    })
                     .to(App._instance._world._room?.roomScene.scale,
                         {
                             x: 1,
@@ -419,6 +459,16 @@ export class Controls {
                         // }
                     }
                 })
+                    .from(App._instance._world._room?.roomScene.scale, {
+                        x: 1,
+                        y: 1,
+                        z: 1,
+                    })
+                    .from(App._instance._world._room?.roomScene.position, {
+                        x: 0.9,
+                        // y: 0.5,
+                        z: 0.5,
+                    })
                     .to(
                         App._instance._world._room?.roomScene.scale,
                         {
@@ -453,6 +503,16 @@ export class Controls {
                         // }
                     },
                 })
+                    .from(App._instance._world._room?.roomScene.scale, {
+                        x: 2,
+                        y: 2,
+                        z: 2
+                    })
+                    .from(App._instance._world._room?.roomScene.position, {
+                        x: -0.6,
+                        // y: 2,
+                        z: 5
+                    })
                     .to(
                         App._instance._world._room?.roomScene.scale,
                         {
