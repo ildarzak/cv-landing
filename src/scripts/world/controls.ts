@@ -10,43 +10,23 @@ export class Controls {
     constructor() {
         GSAP.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+        if (
+            !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            (document.querySelector(".page") as HTMLDivElement).style.height = "auto";
+            this.setSmoothScroll()
+        }
+
         this.setScrollControlls();
         this.setScrollTriggerForMedia();
-
-        // this.smoother = ScrollSmoother.create({
-        //     // smooth: 2,
-        //     effects: true,
-        //   });
 
         (document.querySelector(".page") as HTMLDivElement).style.overflow = "visible"
     }
 
     setSmoothScroll() {
-        const lenis = new Lenis({
-
-        })
-
-        lenis.on('scroll', () => {
-            ScrollTrigger.update()
-        })
-
-        GSAP.ticker.add((time) => {
-            lenis.raf(time * 1000)
-        })
-
-        ScrollTrigger.scrollerProxy(document.getElementsByClassName(".page-wrapper"), {
-            scrollTop(value) {
-                if (arguments.length) {
-                    lenis.setScroll(value)
-                }
-                console.log(value)
-                return lenis.scroll
-            },
-            getBoundingClientRect() {
-                console.log('asd')
-                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-            }
-        })
+        const lenis = new Lenis()
 
         // function raf(time: number) {
         //     lenis.raf(time)
@@ -54,10 +34,15 @@ export class Controls {
         // }
 
         // requestAnimationFrame(raf)
+
+        lenis.on('scroll', ScrollTrigger.update)
+
+        GSAP.ticker.add((time) => {
+            lenis.raf(time * 1000)
+        })
     }
 
     setScrollControlls() {
-        // this.setSmoothScroll()
         ScrollTrigger.matchMedia({
             //Desktop
             "(min-width: 969px)": () => {
