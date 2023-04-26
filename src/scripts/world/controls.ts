@@ -10,39 +10,46 @@ export class Controls {
     constructor() {
         GSAP.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        if (
-            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                navigator.userAgent
-            )
-        ) {
-            (document.querySelector(".page") as HTMLDivElement).style.height = "auto";
-            this.setSmoothScroll()
-        }
+        // if (
+        //     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        //         navigator.userAgent
+        //     )
+        // ) {
+            // (document.querySelector(".page") as HTMLDivElement).style.height = "auto";
+        // this.setSmoothScroll()
+        // }
 
         this.setScrollControlls();
         this.setScrollTriggerForMedia();
 
-        (document.querySelector(".page") as HTMLDivElement).style.overflow = "visible"
+        (document.querySelector(".page") as HTMLDivElement).style.overflow = "scroll"
     }
 
     setSmoothScroll() {
-        const lenis = new Lenis()
-
-        // function raf(time: number) {
-        //     lenis.raf(time)
-        //     requestAnimationFrame(raf)
-        // }
-
-        // requestAnimationFrame(raf)
-
-        lenis.on('scroll', ScrollTrigger.update)
-
-        GSAP.ticker.add((time) => {
-            lenis.raf(time * 1000)
+        const lenis = new Lenis({
+            // wrapper: document.getElementsByClassName("page")[0],
+            // content: document.getElementsByClassName("page-wrapper")[0]
         })
+
+        function raf(time: number) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+
+        // lenis.on('scroll', ScrollTrigger.update)
+
+        // GSAP.ticker.add((time) => {
+        //     lenis.raf(time * 1000)
+        // })
     }
 
     setScrollControlls() {
+        ScrollTrigger.defaults({
+            scroller: document.getElementsByClassName("page")[0],
+        });
+
         ScrollTrigger.matchMedia({
             //Desktop
             "(min-width: 969px)": () => {
